@@ -1,6 +1,13 @@
 let result = document.getElementById("res");
 function num(_button) {
-    result.innerHTML += _button.innerHTML
+    let kolichestvo = result.innerHTML.length
+    if (kolichestvo < 15) {
+        result.innerHTML += _button.innerHTML
+        if (result.innerHTML[1] != "," && result.innerHTML[0] == "0") {
+            let newStr = result.innerHTML.slice(1, 2)
+            result.innerHTML = newStr
+        }
+    }
 }
 function zapyataya() {
     let str = result.innerHTML
