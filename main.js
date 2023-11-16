@@ -3,6 +3,8 @@ let pervoe
 let vtoroe
 let znak
 let plusFlag = 0
+let plusCount = 0
+let deystvie = ""
 function num(_button) {
     if (plusFlag == 1) {
         result.innerHTML = ""
@@ -27,6 +29,11 @@ function zapyataya() {
 function ClearAll() {
     result.innerText = "0"
 }
+function DeleteAll() {
+    pervoe = 0
+    vtoroe = 0
+    ClearAll()
+}
 function Del() {
     let str = result.innerHTML
     if (str.length > 1) {
@@ -48,12 +55,36 @@ function Koren() {
 function Zamena() {
     result.innerHTML = -1 * result.innerHTML
 }
-function Plus() {
+function Plus(_deystvie) {
     plusFlag = 1
-    pervoe = parseFloat(result.innerHTML.replace(",", "."))
-    znak = "+"
+    plusCount += 1
+    if (plusCount == 1) {
+        pervoe = parseFloat(result.innerHTML.replace(",", "."))
+        deystvie = _deystvie
+    } else {
+        vtoroe = parseFloat(result.innerHTML.replace(",", "."))
+        switch (deystvie) {
+            case 1:
+                result.innerHTML = (pervoe + vtoroe).toString().replace(".", ",")
+                break;
+            case 2:
+                result.innerHTML = (pervoe - vtoroe).toString().replace(".", ",")
+                break;
+            case 3:
+                result.innerHTML = (pervoe * vtoroe).toString().replace(".", ",")
+                break;
+            case 4:
+                result.innerHTML = (pervoe / vtoroe).toString().replace(".", ",")
+                break;
+            default:
+                break;
+        }
+        pervoe = parseFloat(result.innerHTML.replace(",", "."))
+        deystvie=_deystvie
+    }
 }
 function Ravno() {
+    plusCount = 0
     vtoroe = parseFloat(result.innerHTML.replace(",", "."))
     result.innerHTML = (pervoe + vtoroe).toString().replace(".", ",")
     plusFlag = 1
